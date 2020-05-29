@@ -4,8 +4,11 @@ import nltk.corpus
 import sys
 import io
 import readRSS
+import re
 
 db = open('userPrefs.txt', 'r').read().lower()
+db = re.sub(r'[^\w\s]','',db)
+setOfWords = list(set(db.split()))
 readRSS.reader('https://www.planeteria.com/feed/')
 dbOfArticles = open('test.txt').read().lower()
 indexOfWords = nltk.Text(word.lower() for word in nltk.corpus.brown.words())
@@ -18,19 +21,21 @@ similar_words = []
 exact_words = []
 #so far for one input of tags (1 user). To expand, we would get tags from 
 #mult sources and assign each tag to the user tag maybe in a dictionary
-for word in nltk.word_tokenize(db):
-    word = word.lower()
-    exact_words.append(word)
-    orig_stdout = sys.stdout
-    out = io.StringIO()
-    sys.stdout = out
-    indexOfWords.similar(word)
-    storable_output = out.getvalue()
-    sys.stdout = orig_stdout
-    similar_words.extend(storable_output.split())
-    #print(storable_output)
-    similar_words = list(set(similar_words))
-    #save.append(indexOfWords.similar_words(word))
+for x in setOfWords:
+    print(x)
+    for word in nltk.word_tokenize(x):
+        word = word.lower()
+        exact_words.append(word)
+        orig_stdout = sys.stdout
+        out = io.StringIO()
+        sys.stdout = out
+        indexOfWords.similar(word)
+        storable_output = out.getvalue()
+        sys.stdout = orig_stdout
+        similar_words.extend(storable_output.split())
+        #print(storable_output)
+        similar_words = list(set(similar_words))
+        #save.append(indexOfWords.similar_words(word))
 
 score = 0
 key = 0
