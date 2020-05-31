@@ -21,7 +21,8 @@ app = Flask(__name__, instance_relative_config=False)
 app.config.from_object('config.Config')
 app.config['SECRET_KEY'] = 'any secret string'
 
-allUsers = open("userPrefs.txt", "a")
+# allUsers = open("userPrefs.txt", "a+")
+allUsers = open('userPrefsDict.json', 'a+')
 data = {}
 if not data:
     userID = 0
@@ -51,9 +52,12 @@ def success():
 def save(message):
     # wordsList = message.split(",")
     data[userID] = message
-    allUsers.write(data[userID])
-    allUsers.write("\n")
-    allUsers.close()
+    # print(data)
+    with open('userPrefsDict.json', 'a+') as f:
+        json.dump(data, f)
+    # allUsers.write(str(userID) + " | " + data[userID] + " | ")
+    # allUsers.write("\n")
+    # allUsers.close()
 
 if __name__ == "__main__":
     app.run()

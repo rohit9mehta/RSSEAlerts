@@ -5,10 +5,18 @@ import sys
 import io
 import readRSS
 import re
+import json
 
-db = open('userPrefs.txt', 'r').read().lower()
-db = re.sub(r'[^\w\s]','',db)
-setOfWords = list(set(db.split()))
+# db = open('userPrefs.txt', 'r').read().lower()
+setOfWordsString = ''
+with open('userPrefsDict.json') as f:
+    dbDict = json.load(f)
+for x in dbDict.values():
+    x = re.sub(r'[^\w\s]','', x)
+    setOfWordsString += x
+setOfWords = list(set(setOfWordsString.split()))
+print(setOfWords)
+dictOfWords = {x: 0 for x in setOfWords}
 readRSS.reader('https://www.planeteria.com/feed/')
 dbOfArticles = open('test.txt').read().lower()
 indexOfWords = nltk.Text(word.lower() for word in nltk.corpus.brown.words())
@@ -16,13 +24,14 @@ save = []
 tokens = ''
 dictOfSimilarWords = {}
 userList = []
+userToArticle = {}
 #print(indexOfWords.similar("launch"))
 similar_words = []
 exact_words = []
 #so far for one input of tags (1 user). To expand, we would get tags from 
 #mult sources and assign each tag to the user tag maybe in a dictionary
 for x in setOfWords:
-    print(x)
+    # print(x)
     for word in nltk.word_tokenize(x):
         word = word.lower()
         exact_words.append(word)
@@ -52,6 +61,7 @@ for eachWord in nltk.word_tokenize(dbOfArticles):
     for word in exact_words:
         if word == eachWord:
             userList.append(key)
+            dictOfWords[word] = key
             untilNextItem = True
             break
     for word in similar_words:
@@ -60,17 +70,28 @@ for eachWord in nltk.word_tokenize(dbOfArticles):
 
     if score / len(dbOfArticles) > 0.05:
         userList.append(key)
+        dictOfWords[word] = key
         untilNextItem = True
-print(userList)
+for i in list(dictOfWords):
+    if dictOfWords[i] == 0:
+        dictOfWords.pop(i)
+# print(userList)
+print(dictOfWords)
 
-#indexOfWords.similar("monstrous")
 
-#print(indexOfWords.similar_words("website"))
-# with open("test2.txt", 'r') as file:
-#     for line in file:
-#         tokens += ", ".join(indexOfWords.similar_words(word))
-#     # for line in file:
-#     #     tokens+=",".join(nltk.word_tokenize(line))
-#
-# save.append(indexOfWords.similar_words('woman'))
-#
+# for users in userPrefs that have a word that is a key in dictOfWords:
+#     key: userID, value: article ID (dictofWords[word])
+#     dump as json file
+with open('userPrefsDict.json') as f:
+    dbDict = json.load(f)
+
+for user in list(dbDict):
+    usersWordsString = ''
+    x = re.sub(r'[^\w\s]','', dbDict[user])
+    usersWordsString += x
+    usersWords = list(set(usersWordsString.split()))
+    for i in usersWords:
+        if i in list(dictOfWords):
+            userToArticle[user] = dictOfWords[i]
+            with open('userToArticle.json', 'w') as theFile:
+                json.dump(userToArticle, theFile)
