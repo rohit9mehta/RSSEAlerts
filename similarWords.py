@@ -18,7 +18,11 @@ setOfWords = list(set(setOfWordsString.split()))
 print(setOfWords)
 dictOfWords = {x: 0 for x in setOfWords}
 readRSS.reader('https://www.planeteria.com/feed/')
-dbOfArticles = open('test.txt').read().lower()
+with open('test.json') as articles:
+    dbOfArticles = json.load(articles)
+for x in dbOfArticles.values():
+    x = x.lower()
+# dbOfArticles = open('test.txt').read().lower()
 indexOfWords = nltk.Text(word.lower() for word in nltk.corpus.brown.words())
 save = []
 tokens = ''
@@ -50,28 +54,30 @@ score = 0
 key = 0
 counter = 0
 untilNextItem = False
-for eachWord in nltk.word_tokenize(dbOfArticles):
-    eachWord = eachWord.lower()
-    if (eachWord.isdigit() and len(eachWord) == 3):
-        key = int(eachWord)
-        untilNextItem = False
-    if untilNextItem:
-        if not all((eachWord.isdigit(), len(eachWord) == 3)):
+for x in list(dbOfArticles):
+    for eachWord in nltk.word_tokenize(dbOfArticles[x]):
+        eachWord = eachWord.lower()
+        # if (eachWord.isdigit() and len(eachWord) == 3):
+        #     key = int(eachWord)
+        #     untilNextItem = False
+        if untilNextItem:
             continue
-    for word in exact_words:
-        if word == eachWord:
-            userList.append(key)
-            dictOfWords[word] = key
-            untilNextItem = True
-            break
-    for word in similar_words:
-        if word == eachWord:
-            score += 1
+        for word in exact_words:
+            if word == eachWord:
+                userList.append(x)
+                dictOfWords[word] = x
+                untilNextItem = True
+                break
+        for word in similar_words:
+            if word == eachWord:
+                score += 1
+    
 
-    if score / len(dbOfArticles) > 0.05:
-        userList.append(key)
-        dictOfWords[word] = key
-        untilNextItem = True
+#similar words finding: have to find algo
+# if score / len(dbOfArticles) > 0.05:
+#     userList.append(key)
+#     dictOfWords[word] = key
+#     untilNextItem = True
 for i in list(dictOfWords):
     if dictOfWords[i] == 0:
         dictOfWords.pop(i)

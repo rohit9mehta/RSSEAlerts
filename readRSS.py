@@ -5,6 +5,7 @@ import time
 from subprocess import check_output
 import sys
 import re
+import json
 from random import randint
 
 feed_name = 'TRIBUNE'
@@ -13,7 +14,7 @@ def reader(url):
     #feed_name = sys.argv[1]
     #url = sys.argv[2]
 
-    db = 'test.txt'
+    db = 'test.json'
     limit = 12 * 3600 * 1000
     dictOfArticles = {}
 
@@ -70,14 +71,17 @@ def reader(url):
     # add all the posts we're going to print to the database with the current timestamp
     # (but only if they're not already in there)
     #
-    f = open(db, 'a')
+    # f = open(db, 'a')
     for title in posts_to_print:
         random_number = randint(100, 999)
         parsedTitle = re.sub('<[^>]+>', '', str(title))
         # if not post_is_in_db(title):
         dictOfArticles[random_number] = parsedTitle
-        f.write(str(random_number) + " " + parsedTitle + "!" + "\n")
-    f.close
+        # f.write(str(random_number) + " " + parsedTitle + "!" + "\n")
+    
+    with open('test.json', 'w') as f:
+            json.dump(dictOfArticles, f)
+    # f.close
         
     #
     # output all of the new posts
