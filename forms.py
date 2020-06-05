@@ -14,8 +14,9 @@ from wtforms.validators import (DataRequired,
 
 class ContactForm(FlaskForm):
     name = StringField("Name: ", validators=[DataRequired()])
+    phone = StringField("Phone Number: ", validators=[DataRequired()]) 
     email = StringField("Email: ", validators=[Email()])
-    body = TextAreaField("Message", validators=[DataRequired()])
+    body = TextAreaField("Message: ", validators=[DataRequired()])
     submit = SubmitField("Submit")
 
 
