@@ -3,6 +3,7 @@ $name = $_POST['name'];
 $number = $_POST['number'];
 $email = $_POST['email'];
 $preferences = $_POST['preferences'];
+echo $number;
 if (!empty($name) || !empty($number) || !empty($email) || !empty($preferences)) {
  $host = "162.244.65.29:3306";
     $dbUsername = "userprefs";
@@ -13,7 +14,6 @@ if (!empty($name) || !empty($number) || !empty($email) || !empty($preferences)) 
     if (mysqli_connect_error()) {
      die('Connect Error('. mysqli_connect_errno().')'. mysqli_connect_error());
     } else {
-      echo "starting to insert";
      $SELECT = "SELECT email From userInput Where email = ? Limit 1";
      $INSERT = "INSERT Into userInput (name, number, email, preferences) values(?, ?, ?, ?)";
      //Prepare statement
