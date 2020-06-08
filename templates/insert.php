@@ -4,9 +4,9 @@ $number = $_POST['number'];
 $email = $_POST['email'];
 $preferences = $_POST['preferences'];
 if (!empty($name) || !empty($number) || !empty($email) || !empty($preferences)) {
- $host = "https://162.244.65.29:8443/";
-    $dbUsername = "admin_";
-    $dbPassword = "The\$ky1isblu3#";
+ $host = "localhost";
+    $dbUsername = "userprefs";
+    $dbPassword = "Thesky1!isblu3#";
     $dbname = "userInput";
     //create connection
     $conn = new mysqli($host, $dbUsername, $dbPassword, $dbname);
