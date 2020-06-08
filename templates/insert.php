@@ -14,8 +14,8 @@ if (!empty($name) || !empty($number) || !empty($email) || !empty($preferences)) 
      die('Connect Error('. mysqli_connect_errno().')'. mysqli_connect_error());
     } else {
       echo "starting to insert";
-     $SELECT = "SELECT email From register Where email = ? Limit 1";
-     $INSERT = "INSERT Into register (name, number, email, preferences) values(?, ?, ?, ?)";
+     $SELECT = "SELECT email From userInput Where email = ? Limit 1";
+     $INSERT = "INSERT Into userInput (name, number, email, preferences) values(?, ?, ?, ?)";
      //Prepare statement
      $stmt = $conn->prepare($SELECT);
      $stmt->bind_param("s", $email);
