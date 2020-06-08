@@ -5,8 +5,8 @@ $email = $_POST['email'];
 $preferences = $_POST['preferences'];
 if (!empty($name) || !empty($number) || !empty($email) || !empty($preferences)) {
  $host = "localhost:3306";
-    $dbUsername = "userprefs";
-    $dbPassword = "Thesky1!isblu3#";
+    $dbUsername = "root";
+    $dbPassword = "";
     $dbname = "userInput";
     //create connection
     $conn = new mysqli($host, $dbUsername, $dbPassword, $dbname);
