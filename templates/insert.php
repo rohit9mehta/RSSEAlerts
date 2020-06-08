@@ -25,7 +25,7 @@ if (!empty($name) || !empty($number) || !empty($email) || !empty($preferences)) 
      if ($rnum==0) {
       $stmt->close();
       $stmt = $conn->prepare($INSERT);
-      // $stmt->bind_param("ssss", $name, $phone_number, $email, $preferences);
+      $stmt->bind_param($name, $phone_number, $email, $preferences);
       $stmt->execute();
       echo "New record inserted sucessfully";
      } else {
