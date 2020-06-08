@@ -24,11 +24,11 @@ mysql_select_db("admin_", $con);
 
  
 
-$sql="INSERT INTO nametable (fname, lname)
+$sql="INSERT INTO userInput (name, number, email, preferences)
 
 VALUES
 
-('$_POST[fname]','$_POST[lname]')";
+('$_POST[name]','$_POST[number]', '$_POST[email]', '$_POST[preferences]')";
 
  
 
