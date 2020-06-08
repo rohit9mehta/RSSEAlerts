@@ -4,7 +4,7 @@ $number = $_POST['number'];
 $email = $_POST['email'];
 $preferences = $_POST['preferences'];
 if (!empty($name) || !empty($number) || !empty($email) || !empty($preferences)) {
- $host = "localhost";
+ $host = "localhost:3306";
     $dbUsername = "userprefs";
     $dbPassword = "Thesky1!isblu3#";
     $dbname = "userInput";
