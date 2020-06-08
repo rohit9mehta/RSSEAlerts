@@ -4,10 +4,10 @@ $number = $_POST['number'];
 $email = $_POST['email'];
 $preferences = $_POST['preferences'];
 if (!empty($name) || !empty($number) || !empty($email) || !empty($preferences)) {
- $host = "localhost:3306";
-    $dbUsername = "root";
-    $dbPassword = "";
-    $dbname = "userInput";
+ $host = "162.244.65.29:3306";
+    $dbUsername = "userprefs";
+    $dbPassword = "#N52igx2";
+    $dbname = "admin_";
     //create connection
     $conn = new mysqli($host, $dbUsername, $dbPassword, $dbname);
     if (mysqli_connect_error()) {
