@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    <link rel="stylesheet" href="/css/tagify.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@yaireo/tagify@3.1.0/dist/tagify.css" />
     <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify@3.1.0/dist/tagify.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
 </head>
@@ -57,15 +57,26 @@
     }
     [type="submit"]:hover { background:#CC4949; }
 
+    .tagify__tag-text
+        {font-family:Helvetica, Arial, sans-serif}
+
+        .tagify {
+    --tag-bg: #CC4949;
+    --tag-pad: 0.6em 0.5em;
+    --tag-inset-shadow-size: 1.5em;
+    border-width: 2px;
+    border-color: #CC6666;
+    border-radius: 5px;
+    }
 
  </style>
-<form action="" method="post">
+<form action="/templates/insert.php" method="post">
     <input name="name" type="text" class="feedback-input" placeholder="Name" />  
-    <input name="phone" type="text" class="feedback-input" placeholder="Phone" />
+    <input name="number" type="text" class="feedback-input" placeholder="Phone" />
     <input name="email" type="text" class="feedback-input" placeholder="Email" />
-    <input type="text" name='basic' value="tag1, tag2" />
+    <input type="text" name='preferences' value="tag1, tag2" />
     <script>
-        var input = document.querySelector('input[name=basic]');
+        var input = document.querySelector('input[name=preferences]');
 
         var tagify = new Tagify(input);
 
