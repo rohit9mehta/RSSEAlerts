@@ -13,6 +13,7 @@ if (!empty($name) || !empty($number) || !empty($email) || !empty($preferences)) 
     if (mysqli_connect_error()) {
      die('Connect Error('. mysqli_connect_errno().')'. mysqli_connect_error());
     } else {
+      echo "starting to insert";
      $SELECT = "SELECT email From register Where email = ? Limit 1";
      $INSERT = "INSERT Into register (name, number, email, preferences) values(?, ?, ?, ?)";
      //Prepare statement
