@@ -1,8 +1,10 @@
 #!/usr/bin/env python
-import cgi;
-import cgitb;
+# -*- coding: UTF-8 -*-
+
+# enable debugging
+import cgitb
 cgitb.enable()
 
-print("Content-Type: text/html")
-print("") #use this double quote print statement to add a blank line in the script
-print("<b>Hello python</b>")
+print("Content-Type: text/plain;charset=utf-8")
+
+print("Hello World!")
