@@ -1,9 +1,7 @@
 #!/usr/bin/env python
+import cgi;
+import cgitb;cgitb.enable()
 
-# enable debugging
-import cgitb
-cgitb.enable()
-
-print("Content-type: text/html\r\n")
-
-print("Hello World!")
+print("Content-Type: text/html")
+print("")
+print("<b>Hello python</b>")
