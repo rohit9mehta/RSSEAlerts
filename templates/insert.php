@@ -6,7 +6,7 @@ $preferences = $_POST['preferences'];
 if (!empty($name) || !empty($number) || !empty($email) || !empty($preferences)) {
  $host = "162.244.65.29:3306";
     $dbUsername = "userprefs";
-    $dbPassword = "#N52igx2";
+    $dbPassword = "iz2X6z1^";
     $dbname = "admin_";
     //create connection
     $conn = new mysqli($host, $dbUsername, $dbPassword, $dbname);
