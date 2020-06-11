@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+import cgi;
+import cgitb;cgitb.enable()
+
 import nltk
 import nltk.text
 import nltk.corpus
