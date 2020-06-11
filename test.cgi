@@ -1,10 +1,9 @@
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
 
 # enable debugging
 import cgitb
 cgitb.enable()
 
-print("Content-Type: text/plain;charset=utf-8")
+print "Content-type: text/html\n\n"
 
 print("Hello World!")
