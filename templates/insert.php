@@ -28,6 +28,7 @@ if (!empty($name) || !empty($number) || !empty($email) || !empty($preferences)) 
       $stmt->bind_param("ssss", $name, $phone_number, $email, $preferences);
       $stmt->execute();
       echo "New record inserted sucessfully";
+      shell_exec('python /similarWords.py');
      } else {
       echo "Someone already registered using this email";
      }
