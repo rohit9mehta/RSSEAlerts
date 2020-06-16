@@ -119,16 +119,28 @@ print(dictOfWords)
 # with open('userPrefsDict.json') as f:
 #     dbDict = json.load(f)
 
-for user in list(dbDict):
-    usersWordsString = ''
-    x = re.sub(r'[^\w\s]','', dbDict[user])
-    usersWordsString += x
-    usersWords = list(set(usersWordsString.split()))
-    for i in usersWords:
-        if i in list(dictOfWords):
-            userToArticle[user] = dictOfWords[i]
-            with open('userToArticle.json', 'w') as theFile:
-                json.dump(userToArticle, theFile)
+sql = "INSERT INTO userArticleMappings (userID, keywords, articles) VALUES (%s, %s, %s)"
+val = []
+for x in list(dbDict):
+    email = x
+    keywords = re.sub(r'[^\w\s]','', dbDict[x])
+    article = dbOfArticles[x]
+    val += [(email, keywords, article)]
+
+mycursor.executemany(sql, val)
+
+mydb.commit()
+
+# for user in list(dbDict):
+#     usersWordsString = ''
+#     x = re.sub(r'[^\w\s]','', dbDict[user])
+#     usersWordsString += x
+#     usersWords = list(set(usersWordsString.split()))
+#     for i in usersWords:
+#         if i in list(dictOfWords):
+#             userToArticle[user] = dictOfWords[i]
+#             with open('userToArticle.json', 'w') as theFile:
+#                 json.dump(userToArticle, theFile)
 
 #####
 
