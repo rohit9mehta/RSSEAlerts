@@ -16,6 +16,7 @@
 from flask import Flask, url_for, render_template, redirect
 from forms import ContactForm
 import json
+from similarWords import similarWords
 
 app = Flask(__name__, instance_relative_config=False)
 app.config.from_object('config.Config')
@@ -55,6 +56,7 @@ def save(message):
     # print(data)
     with open('userPrefsDict.json', 'a+') as f:
         json.dump(data, f)
+    similarWords()
     # allUsers.write(str(userID) + " | " + data[userID] + " | ")
     # allUsers.write("\n")
     # allUsers.close()
