@@ -29,6 +29,7 @@ if (!empty($name) || !empty($number) || !empty($email) || !empty($preferences)) 
       $stmt->execute();
       echo "New record inserted sucessfully";
       shell_exec('python /similarWords.py');
+      echo "Python run successfully";
      } else {
       echo "Someone already registered using this email";
      }

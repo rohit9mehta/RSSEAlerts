@@ -10,6 +10,7 @@ import json
 import mysql.connector
 
 def similarWords():
+    print("program started")
     mydb = mysql.connector.connect(
     host="162.244.65.29:3306",
     user="userprefs",
