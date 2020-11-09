@@ -91,6 +91,15 @@ def run_and_plot(message_ids_, messages_, keywords_):
   for key, value in articleToKeyword.items():
     print(key, ' : ', value)
 
+def import_keywords_from_users():
+  keywords = []
+  with open('userPrefsDict.json', 'r') as f:
+    dbOfUserPrefs = json.load(f)
+    for user in dbOfUserPrefs:
+      keywordsForUser = dbOfUserPrefs[user].split(",")
+      keywords.extend(keywordsForUser)
+  return keywords
+
 readRSS.reader('https://planeteria.com/feed')
 with open('test.json') as articles:
     dbOfArticlesDict = json.load(articles)
@@ -127,11 +136,15 @@ message_ids = list(dbOfArticlesDict.keys())
     # 250,
 #]
 
-keywords = [
-    "coronavirus",
-    "health",
-    "consumer",
-]
+# keywords = [
+#     "coronavirus",
+#     "health",
+#     "consumer",
+# ]
 print(messages)
 articleToKeyword = {}
+keywords = []
+keywords.extend(import_keywords_from_users())
+keywords = list(set(keywords))
+print(keywords)
 run_and_plot(message_ids, messages, keywords)
