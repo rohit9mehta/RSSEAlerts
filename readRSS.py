@@ -15,28 +15,9 @@ def reader(url):
     #feed_name = sys.argv[1]
     #url = sys.argv[2]
 
-    mydb = mysql.connector.connect(
-        host="162.244.65.29:3306",
-        user="userprefs",
-        password="iz2X6z1^",
-        database="admin_"
-    )
-
-    mycursor = mydb.cursor()
-
-    mycursor.execute("SELECT articleID, articleText FROM articleMap")
-
-    myresult = mycursor.fetchall()
-
-    # db = 'test.json'
+    db = 'test.json'
     limit = 12 * 3600 * 1000
     dictOfArticles = {}
-
-    def post_is_in_db(title):
-        for line in myresult:
-            if title in line[1]:
-                return True
-        return False
 
     #
     # function to get the current time
@@ -44,12 +25,12 @@ def reader(url):
     current_time_millis = lambda: int(round(time.time() * 1000))
     current_timestamp = current_time_millis()
 
-    # def post_is_in_db(title):
-    #     with open(db, 'r') as database:
-    #         for line in database:
-    #             if title in line:
-    #                 return True
-    #     return False
+    def post_is_in_db(title):
+        with open(db, 'r') as database:
+            for line in database:
+                if title in line:
+                    return True
+        return False
 
     # return true if the title is in the database with a timestamp > limit
     # def post_is_in_db_with_old_timestamp(title):
@@ -100,7 +81,7 @@ def reader(url):
         # f.write(str(random_number) + " " + parsedTitle + "!" + "\n")
     
     with open('test.json', 'w') as f:
-            json.dump(dictOfArticles, f)
+        json.dump(dictOfArticles, f)
     # f.close
         
     #

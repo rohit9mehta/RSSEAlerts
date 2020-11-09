@@ -12,10 +12,10 @@ import mysql.connector
 def similarWords():
     print("program started")
     mydb = mysql.connector.connect(
-    host="162.244.65.29:3306",
-    user="userprefs",
-    password="iz2X6z1^",
-    database="admin_"
+    host="localhost",
+    user="ealerts",
+    password="VqZ7yriDBufVBnEGzRnT2Ye4'",
+    database="admin_ealerts"
     )
 
     mycursor = mydb.cursor()
